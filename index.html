@@ -58,6 +58,11 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
 .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px}
 .chip{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:12px;color:var(--muted);line-height:1.4}
 .chip b{display:block;color:var(--text);font-weight:600;margin-bottom:1px}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:12px}
+.note h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 8px}
+.note p{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 7px}
+.note p:last-child{margin-bottom:0}
+.note b{color:var(--text);font-weight:600}
 
 .exo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px;transition:border-color .3s,background .3s}
 .exo.complete{border-color:var(--done);background:linear-gradient(0deg,var(--done-soft),var(--surface))}
@@ -120,9 +125,23 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
   <div class="chip"><b>Tempo</b>~2 s à la descente, contrôlé</div>
 </div>
 
+<div class="note">
+  <h3>Avant — nutrition pré-workout</h3>
+  <p><b>1–2 h avant :</b> repas léger axé glucides + un peu de protéines (flocons + banane, riz + poulet, pain + œuf). Évite trop de gras ou de fibres juste avant.</p>
+  <p><b>30 min avant, si pressé :</b> quelque chose de digeste — banane, dattes, ou une tartine de miel.</p>
+  <p><b>Hydratation :</b> bois de l'eau avant de démarrer. Un café peut donner un coup de boost si tu aimes ça.</p>
+</div>
+
 <div id="list"></div>
 
 <div class="footnote">Programme du jour automatique. Tape une série pour la valider, le minuteur de repos est en bas.</div>
+
+<div class="note">
+  <h3>Après — nutrition post-workout</h3>
+  <p><b>Dans l'heure ou deux :</b> ~20–30 g de protéines + des glucides pour recharger — shake + banane, poulet/riz, yaourt grec + fruits + flocons, ou œufs + pain.</p>
+  <p><b>Réhydrate-toi :</b> de l'eau, et des électrolytes si tu as beaucoup transpiré.</p>
+  <p><b>Pas de stress sur le timing :</b> c'est surtout ton apport total sur la journée qui compte, pas la minute après la séance.</p>
+</div>
 
 <div class="timerbar">
   <div class="timerinner">
