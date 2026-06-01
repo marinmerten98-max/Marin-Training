@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mon programme</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Programme">
+<meta name="theme-color" content="#141110">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141110'/%3E%3Ctext x='32' y='44' font-family='Arial' font-size='34' font-weight='900' fill='%23ff5a1f' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141110; --surface:#1e1a17; --surface2:#272220;
+  --line:rgba(245,240,234,.10); --line2:rgba(245,240,234,.18);
+  --text:#f5f0ea; --muted:#a39a90; --faint:#6f665e;
+  --accent:#ff5a1f; --amber:#f0a83a; --amber-soft:#3a2a0e;
+  --done:#37d39b; --done-soft:#0f3a2c;
+  --r:14px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',system-ui,sans-serif;line-height:1.5;
+  max-width:520px;margin:0 auto;padding:0 16px 150px}
+header{padding:calc(22px + env(safe-area-inset-top)) 0 12px}
+.datel{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px);line-height:.92;margin:6px 0 4px;text-transform:uppercase}
+.sub{font-size:14px;color:var(--muted)}
+.progwrap{margin-top:16px}
+.progbar{height:9px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.progbar span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .35s cubic-bezier(.2,.8,.2,1)}
+.progbar.full span{background:var(--done)}
+.progtxt{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:13px;color:var(--muted)}
+#pct{font-weight:600;color:var(--text)}
+.reset{background:none;border:none;color:var(--faint);font-family:inherit;font-size:12.5px;cursor:pointer;padding:2px 4px;text-decoration:underline}
+
+.tabs{display:flex;gap:8px;margin:18px 0 10px}
+.tab{flex:1;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:9px 6px;cursor:pointer;
+  font-family:inherit;color:var(--muted);text-align:center;transition:border-color .15s,color .15s,background .15s}
+.tab b{display:block;font-size:13px;font-weight:600;color:var(--text);line-height:1.15}
+.tab small{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.tab.active{border-color:var(--accent);background:var(--surface2)}
+.tab.active b{color:var(--accent)}
+
+.banner{border-radius:var(--r);padding:14px 16px;margin:6px 0 12px;display:none;font-size:13.5px;line-height:1.5}
+.banner.show{display:block;animation:pop .35s ease}
+.banner.rest{background:linear-gradient(0deg,var(--amber-soft),var(--surface));border:1px solid var(--amber);color:var(--text)}
+.banner.rest b{color:var(--amber)}
+.banner.done{background:linear-gradient(0deg,var(--done-soft),var(--surface));border:1px solid var(--done);text-align:center}
+.banner.done h3{font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 2px;text-transform:uppercase;color:var(--done)}
+.banner.done p{margin:0;color:var(--muted)}
+@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
+
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:12px;color:var(--muted);line-height:1.4}
+.chip b{display:block;color:var(--text);font-weight:600;margin-bottom:1px}
+
+.exo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px;transition:border-color .3s,background .3s}
+.exo.complete{border-color:var(--done);background:linear-gradient(0deg,var(--done-soft),var(--surface))}
+.top{display:flex;align-items:center;gap:13px;margin-bottom:11px}
+.idx{font-family:'Anton',sans-serif;font-size:28px;color:var(--accent);line-height:1;min-width:22px;transition:color .3s}
+.exo.complete .idx{color:var(--done)}
+.names{flex:1}.names h2{font-size:17px;font-weight:600;margin:0;line-height:1.15}
+.tgt{font-size:13px;color:var(--muted);font-weight:500}
+.cue{font-size:13px;color:var(--muted);line-height:1.45;margin-top:5px}
+.cue .lab{display:inline-block;color:var(--accent);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-right:6px}
+.sets{display:flex;gap:9px;margin-top:13px}
+.set{flex:1;min-height:52px;border:1.5px solid var(--line2);background:var(--surface2);color:var(--text);border-radius:12px;
+  font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:transform .12s,background .15s,border-color .15s,color .15s}
+.set:active{transform:scale(.93)}
+.set.on{background:var(--done);border-color:var(--done);color:#06281d}
+.set .chk{font-size:19px}
+
+.timerbar{position:fixed;left:0;right:0;bottom:0;background:rgba(26,22,20,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--line2);padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:20}
+.timerinner{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.tleft{min-width:90px}
+.tlabel{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ttime{font-family:'Anton',sans-serif;font-size:28px;line-height:1}
+.ttime.run{color:var(--accent)}.ttime.done{color:var(--done)}
+.tbtns{display:flex;gap:8px;flex:1;justify-content:flex-end}
+.tbtns button{font-family:inherit;font-weight:600;font-size:14px;border-radius:11px;padding:11px 14px;border:1.5px solid var(--line2);
+  background:var(--surface2);color:var(--text);cursor:pointer;transition:transform .12s}
+.tbtns button:active{transform:scale(.95)}
+.tbtns .go{background:var(--accent);border-color:var(--accent);color:#1a0a04}
+.tbtns .stop{display:none}
+.footnote{font-size:12px;color:var(--faint);text-align:center;margin:16px 0 4px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="datel" id="datel">Aujourd'hui</div>
+  <h1 id="title">Programme</h1>
+  <div class="sub" id="sub"></div>
+  <div class="progwrap">
+    <div class="progbar" id="bar"><span id="fill"></span></div>
+    <div class="progtxt"><span id="pct">0%</span><span><span id="count">0 / 0</span> · <button class="reset" id="reset">réinitialiser</button></span></div>
+  </div>
+</header>
+
+<div class="tabs" id="tabs">
+  <button class="tab" data-key="A"><b>Haut · poussée</b><small>lun</small></button>
+  <button class="tab" data-key="B"><b>Haut · tirage</b><small>mer</small></button>
+  <button class="tab" data-key="C"><b>Bas + core</b><small>ven</small></button>
+</div>
+
+<div class="banner rest" id="restBanner"><b>Repos / récup aujourd'hui.</b> Marche, mobilité épaules &amp; hanches, étirements. Tu peux quand même choisir une séance ci-dessus.</div>
+<div class="banner done" id="doneBanner"><h3>Séance bouclée</h3><p>Bien joué. Repos, hydrate-toi, scanne en sortant.</p></div>
+
+<div class="chips">
+  <div class="chip"><b>Échauffement</b>5 min vélo à bras</div>
+  <div class="chip"><b>Poids</b>1ère série = test, ~2 reps en réserve</div>
+  <div class="chip"><b>Repos</b>60–90 s entre les séries</div>
+  <div class="chip"><b>Tempo</b>~2 s à la descente, contrôlé</div>
+</div>
+
+<div id="list"></div>
+
+<div class="footnote">Programme du jour automatique. Tape une série pour la valider, le minuteur de repos est en bas.</div>
+
+<div class="timerbar">
+  <div class="timerinner">
+    <div class="tleft"><div class="tlabel">Repos</div><div class="ttime" id="ttime">1:30</div></div>
+    <div class="tbtns"><button id="b60">60 s</button><button id="b90" class="go">90 s</button><button id="bstop" class="stop">Stop</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SESSIONS={
+    A:{title:'Haut · poussée',sub:'Pecs, épaules, triceps',items:[
+      {n:'Développé poitrine',t:'3 × 10',sets:3,l1:'Repère',c1:'Assis, dossier dans le dos, tu pousses 2 poignées droit devant toi.',l2:'Réglage',c2:'Poignées au milieu de la poitrine, ne verrouille pas les coudes.'},
+      {n:'Développé épaules',t:'3 × 8–10',sets:3,l1:'Repère',c1:'Comme le développé poitrine, mais tu pousses vers le haut.',l2:'Réglage',c2:'Poignées au niveau des épaules au départ, descente contrôlée.'},
+      {n:'Écarté poitrine — pec deck',t:'3 × 12',sets:3,l1:'Repère',c1:'Assis, 2 bras articulés que tu ramènes l\u2019un vers l\u2019autre devant toi.',l2:'Réglage',c2:'Poignées à hauteur de poitrine, sans forcer l\u2019étirement.'},
+      {n:'Extension triceps à la poulie',t:'3 × 12',sets:3,l1:'Repère',c1:'Poulie haute avec une corde ou une barre.',l2:'Réglage',c2:'Coudes collés au corps, pousse vers le bas, contrôle la remontée.'},
+      {n:'Élévations latérales (haltères)',t:'3 × 12–15',sets:3,l1:'Repère',c1:'2 haltères légers, bras le long du corps.',l2:'Réglage',c2:'Monte les bras sur les côtés jusqu\u2019à l\u2019horizontale, léger et propre.'}
+    ]},
+    B:{title:'Haut · tirage',sub:'Dos, biceps, posture',items:[
+      {n:'Tirage vertical',t:'3 × 10',sets:3,l1:'Repère',c1:'Grande barre suspendue en haut, tu t\u2019assois dessous.',l2:'Réglage',c2:'Cuisses sous le coussin, tire la barre vers le haut de la poitrine.'},
+      {n:'Rowing assis',t:'3 × 10–12',sets:3,l1:'Repère',c1:'Assis, tu tires une poignée vers ton ventre.',l2:'Réglage',c2:'Dos droit, serre les omoplates, contrôle le retour.'},
+      {n:'Face pull (poulie)',t:'3 × 15',sets:3,l1:'Repère',c1:'Poulie haute, corde ramenée vers le visage.',l2:'Réglage',c2:'Tire vers le front, coudes hauts. Excellent pour la posture.'},
+      {n:'Curl biceps',t:'3 × 10–12',sets:3,l1:'Repère',c1:'Haltères ou poulie basse.',l2:'Réglage',c2:'Coudes fixes, monte sans balancer le buste.'},
+      {n:'Gainage — planche',t:'3 × 30–45 s',sets:3,l1:'Repère',c1:'Au sol, en appui sur les avant-bras.',l2:'Réglage',c2:'Corps aligné, abdos serrés, ne creuse pas le bas du dos.'}
+    ]},
+    C:{title:'Bas + core',sub:'Léger — tes jambes courent déjà',items:[
+      {n:'Presse à cuisses',t:'3 × 12',sets:3,l1:'Repère',c1:'Assis, tu pousses la plateforme avec les pieds.',l2:'Réglage',c2:'Charge modérée, ne verrouille pas les genoux en haut.'},
+      {n:'Leg curl (ischios)',t:'3 × 12',sets:3,l1:'Repère',c1:'Allongé ou assis, tu ramènes les talons vers les fesses.',l2:'Réglage',c2:'Mouvement contrôlé, sans à-coups.'},
+      {n:'Extension mollets',t:'3 × 15',sets:3,l1:'Repère',c1:'Debout ou assis, tu montes sur la pointe des pieds.',l2:'Réglage',c2:'Amplitude complète, petite pause en haut.'},
+      {n:'Gainage — planche',t:'3 × 40 s',sets:3,l1:'Repère',c1:'Avant-bras au sol.',l2:'Réglage',c2:'Corps gainé et aligné, respiration calme.'},
+      {n:'Relevés de jambes',t:'3 × 15',sets:3,l1:'Repère',c1:'Au sol ou sur un banc.',l2:'Réglage',c2:'Contrôle la descente, souffle en remontant.'}
+    ]}
+  };
+  var WEEK={1:'A',3:'B',5:'C'};
+  var DAYS=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+  var MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+  var list=document.getElementById('list'),fill=document.getElementById('fill'),bar=document.getElementById('bar');
+  var pct=document.getElementById('pct'),count=document.getElementById('count');
+  var doneBanner=document.getElementById('doneBanner'),restBanner=document.getElementById('restBanner');
+  var titleEl=document.getElementById('title'),subEl=document.getElementById('sub'),datel=document.getElementById('datel');
+  var current='A';
+
+  var d=new Date();
+  var dateStr=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+  datel.textContent=DAYS[d.getDay()]+' '+d.getDate()+' '+MONTHS[d.getMonth()];
+
+  function key(k){return 'wk:'+dateStr+':'+k;}
+  function save(k,arr){try{localStorage.setItem(key(k),JSON.stringify(arr));}catch(e){}}
+  function load(k){try{var v=localStorage.getItem(key(k));return v?JSON.parse(v):[];}catch(e){return [];}}
+  function buzz(p){try{if(navigator.vibrate)navigator.vibrate(p);}catch(e){}}
+
+  function collect(){var a=[];document.querySelectorAll('.set.on').forEach(function(s){a.push(s.dataset.i);});return a;}
+
+  function refresh(){
+    var all=document.querySelectorAll('.set'),done=document.querySelectorAll('.set.on').length,total=all.length;
+    var p=total?Math.round(done/total*100):0;
+    fill.style.width=p+'%';pct.textContent=p+'%';count.textContent=done+' / '+total;
+    bar.classList.toggle('full',total>0&&done===total);
+    doneBanner.classList.toggle('show',total>0&&done===total);
+    document.querySelectorAll('.exo').forEach(function(ex){
+      var b=ex.querySelectorAll('.set'),on=ex.querySelectorAll('.set.on');
+      ex.classList.toggle('complete',b.length>0&&on.length===b.length);
+    });
+  }
+
+  function wire(){
+    document.querySelectorAll('.set').forEach(function(s){
+      s.addEventListener('click',function(){
+        var on=s.classList.toggle('on');
+        s.innerHTML=on?'<span class="chk">✓</span>':s.dataset.n;
+        buzz(12);save(current,collect());refresh();
+      });
+    });
+  }
+
+  function render(k){
+    current=k;var s=SESSIONS[k];titleEl.textContent=s.title;subEl.textContent=s.sub;
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.key===k);});
+    var saved=load(k),h='';
+    s.items.forEach(function(it,i){
+      var sets='';
+      for(var j=1;j<=it.sets;j++){var id=i+'-'+j,on=saved.indexOf(id)>-1;
+        sets+='<button class="set'+(on?' on':'')+'" data-n="'+j+'" data-i="'+id+'">'+(on?'<span class="chk">✓</span>':j)+'</button>';}
+      h+='<article class="exo"><div class="top"><span class="idx">'+(i+1)+'</span><div class="names"><h2>'+it.n+'</h2><span class="tgt">'+it.t+'</span></div></div>'
+        +'<div class="cue"><span class="lab">'+it.l1+'</span>'+it.c1+'</div>'
+        +'<div class="cue"><span class="lab">'+it.l2+'</span>'+it.c2+'</div>'
+        +'<div class="sets">'+sets+'</div></article>';
+    });
+    list.innerHTML=h;wire();refresh();
+  }
+
+  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){render(t.dataset.key);window.scrollTo({top:0,behavior:'smooth'});});});
+  document.getElementById('reset').addEventListener('click',function(){save(current,[]);render(current);});
+
+  var todayKey=WEEK[d.getDay()];
+  if(!todayKey){restBanner.classList.add('show');todayKey='A';}
+  render(todayKey);
+
+  var ttime=document.getElementById('ttime'),timer=null,remain=0;
+  function fmt(s){return Math.floor(s/60)+':'+((s%60)<10?'0':'')+(s%60);}
+  function start(sec){clearInterval(timer);remain=sec;ttime.textContent=fmt(remain);ttime.classList.add('run');ttime.classList.remove('done');
+    document.getElementById('bstop').style.display='inline-block';buzz(12);
+    timer=setInterval(function(){remain--;ttime.textContent=fmt(remain);
+      if(remain<=0){clearInterval(timer);timer=null;ttime.classList.remove('run');ttime.classList.add('done');ttime.textContent='GO';buzz([60,40,60]);document.getElementById('bstop').style.display='none';}},1000);}
+  document.getElementById('b60').addEventListener('click',function(){start(60);});
+  document.getElementById('b90').addEventListener('click',function(){start(90);});
+  document.getElementById('bstop').addEventListener('click',function(){clearInterval(timer);timer=null;ttime.classList.remove('run','done');ttime.textContent='1:30';this.style.display='none';});
+})();
+</script>
+</body>
+</html>
