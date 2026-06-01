@@ -28,9 +28,11 @@ body{background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',system-
   max-width:520px;margin:0 auto;padding:0 16px 150px}
 header{padding:calc(22px + env(safe-area-inset-top)) 0 12px}
 .datel{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
-h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px);line-height:.92;margin:6px 0 4px;text-transform:uppercase}
+h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(32px,10vw,46px);line-height:.92;margin:6px 0 4px;text-transform:uppercase}
 .sub{font-size:14px;color:var(--muted)}
-.progwrap{margin-top:16px}
+.phaseTag{font-size:12px;color:var(--text);margin-top:6px}
+.phaseTag b{color:var(--accent);font-weight:600}
+.progwrap{margin-top:14px}
 .progbar{height:9px;background:var(--surface2);border-radius:99px;overflow:hidden}
 .progbar span{display:block;height:100%;width:0;background:var(--accent);border-radius:99px;transition:width .35s cubic-bezier(.2,.8,.2,1)}
 .progbar.full span{background:var(--done)}
@@ -38,27 +40,34 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
 #pct{font-weight:600;color:var(--text)}
 .reset{background:none;border:none;color:var(--faint);font-family:inherit;font-size:12.5px;cursor:pointer;padding:2px 4px;text-decoration:underline}
 
-.tabs{display:flex;gap:8px;margin:18px 0 10px}
-.tab{flex:1;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:9px 6px;cursor:pointer;
-  font-family:inherit;color:var(--muted);text-align:center;transition:border-color .15s,color .15s,background .15s}
+.tabs{display:flex;gap:8px;margin:16px 0 12px}
+.tab{flex:1;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:9px 6px;cursor:pointer;font-family:inherit;color:var(--muted);text-align:center;transition:border-color .15s,color .15s,background .15s}
 .tab b{display:block;font-size:13px;font-weight:600;color:var(--text);line-height:1.15}
 .tab small{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
 .tab.active{border-color:var(--accent);background:var(--surface2)}
 .tab.active b{color:var(--accent)}
 
-.banner{border-radius:var(--r);padding:14px 16px;margin:6px 0 12px;display:none;font-size:13.5px;line-height:1.5}
-.banner.show{display:block;animation:pop .35s ease}
-.banner.rest{background:linear-gradient(0deg,var(--amber-soft),var(--surface));border:1px solid var(--amber);color:var(--text)}
-.banner.rest b{color:var(--amber)}
-.banner.done{background:linear-gradient(0deg,var(--done-soft),var(--surface));border:1px solid var(--done);text-align:center}
-.banner.done h3{font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 2px;text-transform:uppercase;color:var(--done)}
-.banner.done p{margin:0;color:var(--muted)}
-@keyframes pop{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
+.lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600;margin:4px 2px 6px}
+.phases{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;-webkit-overflow-scrolling:touch}
+.phase{flex:0 0 auto;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;min-width:118px}
+.phase b{display:block;font-size:12.5px;color:var(--text);font-weight:600}
+.phase small{font-size:10.5px;color:var(--muted)}
+.phase.active{border-color:var(--accent);background:var(--surface2)}
+.phase.active b{color:var(--accent)}
+.phaseinfo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;margin:6px 0 16px;font-size:13px;color:var(--muted);line-height:1.5}
+.phaseinfo .sch{color:var(--accent);font-weight:600}
+.phaseinfo b{color:var(--text)}
+details.plan{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+details.plan summary{cursor:pointer;color:var(--accent);font-size:12px;font-weight:600;list-style:none}
+details.plan summary::-webkit-details-marker{display:none}
+details.plan .pl{margin-top:10px}
+details.plan .pl p{margin:0 0 9px;font-size:12.5px;line-height:1.5;color:var(--muted)}
+details.plan .pl p b{color:var(--text)}
 
-.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
 .chip{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:12px;color:var(--muted);line-height:1.4}
 .chip b{display:block;color:var(--text);font-weight:600;margin-bottom:1px}
-.note{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:12px}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
 .note h3{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 8px}
 .note p{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 7px}
 .note p:last-child{margin-bottom:0}
@@ -66,43 +75,47 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
 
 .exo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px;transition:border-color .3s,background .3s}
 .exo.complete{border-color:var(--done);background:linear-gradient(0deg,var(--done-soft),var(--surface))}
-.top{display:flex;align-items:center;gap:13px;margin-bottom:11px}
+.top{display:flex;align-items:center;gap:13px;margin-bottom:6px}
 .idx{font-family:'Anton',sans-serif;font-size:28px;color:var(--accent);line-height:1;min-width:22px;transition:color .3s}
 .exo.complete .idx{color:var(--done)}
-.names{flex:1}.names h2{font-size:17px;font-weight:600;margin:0;line-height:1.15}
+.names{flex:1}.names h2{font-size:16px;font-weight:600;margin:0;line-height:1.2}
 .tgt{font-size:13px;color:var(--muted);font-weight:500}
-.cue{font-size:13px;color:var(--muted);line-height:1.45;margin-top:5px}
+.meta{font-size:12px;color:var(--muted);margin:2px 0 0 35px;line-height:1.4}
+.meta .cw{color:var(--accent);font-weight:600}
+.cue{font-size:13px;color:var(--muted);line-height:1.45;margin-top:6px}
 .cue .lab{display:inline-block;color:var(--accent);font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;margin-right:6px}
 .sets{display:flex;gap:9px;margin-top:13px}
-.set{flex:1;min-height:52px;border:1.5px solid var(--line2);background:var(--surface2);color:var(--text);border-radius:12px;
-  font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:transform .12s,background .15s,border-color .15s,color .15s}
+.set{flex:1;min-height:52px;border:1.5px solid var(--line2);background:var(--surface2);color:var(--text);border-radius:12px;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .12s,background .15s,border-color .15s,color .15s}
 .set:active{transform:scale(.93)}
 .set.on{background:var(--done);border-color:var(--done);color:#06281d}
 .set .chk{font-size:19px}
 
-.timerbar{position:fixed;left:0;right:0;bottom:0;background:rgba(26,22,20,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-top:1px solid var(--line2);padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:20}
+.timerbar{position:fixed;left:0;right:0;bottom:0;background:rgba(26,22,20,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line2);padding:12px 16px calc(12px + env(safe-area-inset-bottom));z-index:20}
 .timerinner{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:14px}
 .tleft{min-width:90px}
 .tlabel{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .ttime{font-family:'Anton',sans-serif;font-size:28px;line-height:1}
 .ttime.run{color:var(--accent)}.ttime.done{color:var(--done)}
 .tbtns{display:flex;gap:8px;flex:1;justify-content:flex-end}
-.tbtns button{font-family:inherit;font-weight:600;font-size:14px;border-radius:11px;padding:11px 14px;border:1.5px solid var(--line2);
-  background:var(--surface2);color:var(--text);cursor:pointer;transition:transform .12s}
+.tbtns button{font-family:inherit;font-weight:600;font-size:14px;border-radius:11px;padding:11px 14px;border:1.5px solid var(--line2);background:var(--surface2);color:var(--text);cursor:pointer;transition:transform .12s}
 .tbtns button:active{transform:scale(.95)}
 .tbtns .go{background:var(--accent);border-color:var(--accent);color:#1a0a04}
 .tbtns .stop{display:none}
+.banner{border-radius:var(--r);padding:14px 16px;margin:6px 0 12px;display:none;font-size:13.5px;line-height:1.5}
+.banner.show{display:block}
+.banner.done{background:linear-gradient(0deg,var(--done-soft),var(--surface));border:1px solid var(--done);text-align:center}
+.banner.done h3{font-family:'Anton',sans-serif;font-weight:400;font-size:24px;margin:0 0 2px;text-transform:uppercase;color:var(--done)}
+.banner.done p{margin:0;color:var(--muted)}
 .footnote{font-size:12px;color:var(--faint);text-align:center;margin:16px 0 4px;line-height:1.5}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="datel" id="datel">Aujourd'hui</div>
+  <div class="datel" id="datel">Aujourd’hui</div>
   <h1 id="title">Programme</h1>
   <div class="sub" id="sub"></div>
+  <div class="phaseTag" id="phaseTag"></div>
   <div class="progwrap">
     <div class="progbar" id="bar"><span id="fill"></span></div>
     <div class="progtxt"><span id="pct">0%</span><span><span id="count">0 / 0</span> · <button class="reset" id="reset">réinitialiser</button></span></div>
@@ -115,13 +128,16 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
   <button class="tab" data-key="C"><b>Bas + core</b><small>ven</small></button>
 </div>
 
-<div class="banner rest" id="restBanner"><b>Repos / récup aujourd'hui.</b> Marche, mobilité épaules &amp; hanches, étirements. Tu peux quand même choisir une séance ci-dessus.</div>
+<div class="lbl">Phase du plan 6 mois</div>
+<div class="phases" id="phases"></div>
+<div class="phaseinfo" id="phaseinfo"></div>
+
 <div class="banner done" id="doneBanner"><h3>Séance bouclée</h3><p>Bien joué. Repos, hydrate-toi, scanne en sortant.</p></div>
 
 <div class="chips">
   <div class="chip"><b>Échauffement</b>5 min vélo à bras</div>
-  <div class="chip"><b>Poids</b>1ère série = test, ~2 reps en réserve</div>
-  <div class="chip"><b>Repos</b>60–90 s entre les séries</div>
+  <div class="chip"><b>Charge</b>1ère série = montée en charge, puis tes séries de travail</div>
+  <div class="chip"><b>Repos</b>60–90 s (90–120 s sur composés lourds)</div>
   <div class="chip"><b>Tempo</b>~2 s à la descente, contrôlé</div>
 </div>
 
@@ -129,19 +145,19 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
   <h3>Avant — nutrition pré-workout</h3>
   <p><b>1–2 h avant :</b> repas léger axé glucides + un peu de protéines (flocons + banane, riz + poulet, pain + œuf). Évite trop de gras ou de fibres juste avant.</p>
   <p><b>30 min avant, si pressé :</b> quelque chose de digeste — banane, dattes, ou une tartine de miel.</p>
-  <p><b>Hydratation :</b> bois de l'eau avant de démarrer. Un café peut donner un coup de boost si tu aimes ça.</p>
+  <p><b>Hydratation :</b> bois de l’eau avant de démarrer. Un café peut donner un coup de boost si tu aimes ça.</p>
 </div>
 
 <div id="list"></div>
 
-<div class="footnote">Programme du jour automatique. Tape une série pour la valider, le minuteur de repos est en bas.</div>
-
 <div class="note">
   <h3>Après — nutrition post-workout</h3>
-  <p><b>Dans l'heure ou deux :</b> ~20–30 g de protéines + des glucides pour recharger — shake + banane, poulet/riz, yaourt grec + fruits + flocons, ou œufs + pain.</p>
-  <p><b>Réhydrate-toi :</b> de l'eau, et des électrolytes si tu as beaucoup transpiré.</p>
-  <p><b>Pas de stress sur le timing :</b> c'est surtout ton apport total sur la journée qui compte, pas la minute après la séance.</p>
+  <p><b>Dans l’heure ou deux :</b> ~20–30 g de protéines + des glucides pour recharger — shake + banane, poulet/riz, yaourt grec + fruits + flocons, ou œufs + pain.</p>
+  <p><b>Réhydrate-toi :</b> de l’eau, et des électrolytes si tu as beaucoup transpiré.</p>
+  <p><b>Pas de stress sur le timing :</b> c’est surtout ton apport total sur la journée qui compte.</p>
 </div>
+
+<div class="footnote">Les charges affichées sont tes perfs actuelles. Les objectifs 6 mois sont des estimations, pas des garanties — le vrai moteur, c’est la règle de progression dans la phase.</div>
 
 <div class="timerbar">
   <div class="timerinner">
@@ -152,27 +168,33 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
 
 <script>
 (function(){
+  var PHASES=[
+    {n:'Adaptation',w:'Sem. 1–4',comp:'3 × 12',iso:'3 × 12',cset:3,iset:3,goal:'Apprendre les mouvements et atteindre 3×12 propres à ta charge actuelle, en gardant 2–3 reps en réserve.'},
+    {n:'Hypertrophie',w:'Sem. 5–10',comp:'4 × 10–12',iso:'3 × 12',cset:4,iset:3,goal:'On ajoute du volume. Double progression : quand tu fais toutes tes séries en haut de la fourchette, monte la charge.'},
+    {n:'Force-volume',w:'Sem. 11–16',comp:'4 × 8–10',iso:'3 × 12',cset:4,iset:3,goal:'On charge un peu plus les exercices composés, reps plus basses, isolations maintenues.'},
+    {n:'Force',w:'Sem. 17–24',comp:'4 × 6–8',iso:'3 × 10–12',cset:4,iset:3,goal:'Pic de force sur les composés. Deload léger en semaine 20. Charges hautes, technique nickel.'}
+  ];
   var SESSIONS={
     A:{title:'Haut · poussée',sub:'Pecs, épaules, triceps',items:[
-      {n:'Développé poitrine',t:'3 × 10',sets:3,l1:'Repère',c1:'Assis, dossier dans le dos, tu pousses 2 poignées droit devant toi.',l2:'Réglage',c2:'Poignées au milieu de la poitrine, ne verrouille pas les coudes.'},
-      {n:'Développé épaules',t:'3 × 8–10',sets:3,l1:'Repère',c1:'Comme le développé poitrine, mais tu pousses vers le haut.',l2:'Réglage',c2:'Poignées au niveau des épaules au départ, descente contrôlée.'},
-      {n:'Écarté poitrine — pec deck',t:'3 × 12',sets:3,l1:'Repère',c1:'Assis, 2 bras articulés que tu ramènes l\u2019un vers l\u2019autre devant toi.',l2:'Réglage',c2:'Poignées à hauteur de poitrine, sans forcer l\u2019étirement.'},
-      {n:'Extension triceps à la poulie',t:'3 × 12',sets:3,l1:'Repère',c1:'Poulie haute avec une corde ou une barre.',l2:'Réglage',c2:'Coudes collés au corps, pousse vers le bas, contrôle la remontée.'},
-      {n:'Élévations latérales (haltères)',t:'3 × 12–15',sets:3,l1:'Repère',c1:'2 haltères légers, bras le long du corps.',l2:'Réglage',c2:'Monte les bras sur les côtés jusqu\u2019à l\u2019horizontale, léger et propre.'}
+      {n:'Développé couché (bench)',type:'comp',cur:'52 kg (top 59 × 5)',goal:'~65–70 kg',l1:'Repère',c1:'Allongé sur un banc (barre ou Smith), tu pousses la barre au-dessus de la poitrine.',l2:'Réglage',c2:'Prise un peu plus large que les épaules, descends au bas des pecs, ne rebondis pas.'},
+      {n:'Développé épaules',type:'comp',cur:'90 lbs (~41 kg)',goal:'~110 lbs',l1:'Repère',c1:'Assis, tu pousses les poignées vers le haut.',l2:'Réglage',c2:'Poignées au niveau des épaules au départ, descente contrôlée.'},
+      {n:'Écarté poitrine (pec fly)',type:'iso',cur:'79 kg',goal:'~95 kg',l1:'Repère',c1:'Assis, 2 bras articulés que tu ramènes devant toi.',l2:'Réglage',c2:'Poignées à hauteur de poitrine, sans forcer l’étirement.'},
+      {n:'Extension triceps',type:'iso',cur:'45 kg',goal:'~57 kg',l1:'Repère',c1:'Poulie haute, corde ou barre.',l2:'Réglage',c2:'Coudes collés au corps, pousse vers le bas, contrôle la remontée.'},
+      {n:'Élévations latérales',type:'iso',cur:'à calibrer',goal:'',l1:'Repère',c1:'2 haltères légers le long du corps.',l2:'Réglage',c2:'Monte sur les côtés jusqu’à l’horizontale, léger, sans balancer. Départ ~6–10 kg/haltère.'}
     ]},
     B:{title:'Haut · tirage',sub:'Dos, biceps, posture',items:[
-      {n:'Tirage vertical',t:'3 × 10',sets:3,l1:'Repère',c1:'Grande barre suspendue en haut, tu t\u2019assois dessous.',l2:'Réglage',c2:'Cuisses sous le coussin, tire la barre vers le haut de la poitrine.'},
-      {n:'Rowing assis',t:'3 × 10–12',sets:3,l1:'Repère',c1:'Assis, tu tires une poignée vers ton ventre.',l2:'Réglage',c2:'Dos droit, serre les omoplates, contrôle le retour.'},
-      {n:'Face pull (poulie)',t:'3 × 15',sets:3,l1:'Repère',c1:'Poulie haute, corde ramenée vers le visage.',l2:'Réglage',c2:'Tire vers le front, coudes hauts. Excellent pour la posture.'},
-      {n:'Curl biceps',t:'3 × 10–12',sets:3,l1:'Repère',c1:'Haltères ou poulie basse.',l2:'Réglage',c2:'Coudes fixes, monte sans balancer le buste.'},
-      {n:'Gainage — planche',t:'3 × 30–45 s',sets:3,l1:'Repère',c1:'Au sol, en appui sur les avant-bras.',l2:'Réglage',c2:'Corps aligné, abdos serrés, ne creuse pas le bas du dos.'}
+      {n:'Tirage vertical',type:'comp',cur:'à calibrer',goal:'',l1:'Repère',c1:'Grande barre suspendue, tu t’assois dessous.',l2:'Réglage',c2:'Cuisses sous le coussin, tire la barre vers le haut de la poitrine. Départ ~40–45 kg.'},
+      {n:'Rowing assis (seated row)',type:'comp',cur:'45 kg',goal:'~60 kg',l1:'Repère',c1:'Assis, tu tires une poignée vers ton ventre.',l2:'Réglage',c2:'Dos droit, serre les omoplates, contrôle le retour.'},
+      {n:'Face pull',type:'iso',cur:'à calibrer',goal:'',l1:'Repère',c1:'Poulie haute, corde ramenée vers le visage.',l2:'Réglage',c2:'Tire vers le front, coudes hauts. Léger, super pour la posture.'},
+      {n:'Curl biceps (arm curl)',type:'iso',cur:'31 kg',goal:'~40 kg',l1:'Repère',c1:'Machine, haltères ou poulie basse.',l2:'Réglage',c2:'Coudes fixes, monte sans balancer le buste.'},
+      {n:'Gainage — planche',type:'iso',cur:'30–45 s',goal:'60 s',fixed:'3 × 30–60 s',l1:'Repère',c1:'Au sol sur les avant-bras.',l2:'Réglage',c2:'Corps aligné, abdos serrés, ne creuse pas le dos.'}
     ]},
     C:{title:'Bas + core',sub:'Léger — tes jambes courent déjà',items:[
-      {n:'Presse à cuisses',t:'3 × 12',sets:3,l1:'Repère',c1:'Assis, tu pousses la plateforme avec les pieds.',l2:'Réglage',c2:'Charge modérée, ne verrouille pas les genoux en haut.'},
-      {n:'Leg curl (ischios)',t:'3 × 12',sets:3,l1:'Repère',c1:'Allongé ou assis, tu ramènes les talons vers les fesses.',l2:'Réglage',c2:'Mouvement contrôlé, sans à-coups.'},
-      {n:'Extension mollets',t:'3 × 15',sets:3,l1:'Repère',c1:'Debout ou assis, tu montes sur la pointe des pieds.',l2:'Réglage',c2:'Amplitude complète, petite pause en haut.'},
-      {n:'Gainage — planche',t:'3 × 40 s',sets:3,l1:'Repère',c1:'Avant-bras au sol.',l2:'Réglage',c2:'Corps gainé et aligné, respiration calme.'},
-      {n:'Relevés de jambes',t:'3 × 15',sets:3,l1:'Repère',c1:'Au sol ou sur un banc.',l2:'Réglage',c2:'Contrôle la descente, souffle en remontant.'}
+      {n:'Presse à cuisses',type:'comp',cur:'à calibrer',goal:'',l1:'Repère',c1:'Assis, tu pousses la plateforme avec les pieds.',l2:'Réglage',c2:'Charge modérée, ne verrouille pas les genoux en haut.'},
+      {n:'Leg curl (ischios)',type:'iso',cur:'à calibrer',goal:'',l1:'Repère',c1:'Allongé ou assis, tu ramènes les talons vers les fesses.',l2:'Réglage',c2:'Mouvement contrôlé, sans à-coups.'},
+      {n:'Extension mollets',type:'iso',cur:'à calibrer',goal:'',l1:'Repère',c1:'Debout ou assis, tu montes sur la pointe des pieds.',l2:'Réglage',c2:'Amplitude complète, petite pause en haut.'},
+      {n:'Gainage — planche',type:'iso',cur:'40 s',goal:'60 s',fixed:'3 × 40–60 s',l1:'Repère',c1:'Avant-bras au sol.',l2:'Réglage',c2:'Corps gainé et aligné, respiration calme.'},
+      {n:'Relevés de jambes',type:'iso',cur:'poids du corps',goal:'+ lest',fixed:'3 × 15',l1:'Repère',c1:'Au sol ou sur un banc.',l2:'Réglage',c2:'Contrôle la descente, souffle en remontant.'}
     ]}
   };
   var WEEK={1:'A',3:'B',5:'C'};
@@ -180,21 +202,23 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
   var MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
   var list=document.getElementById('list'),fill=document.getElementById('fill'),bar=document.getElementById('bar');
-  var pct=document.getElementById('pct'),count=document.getElementById('count');
-  var doneBanner=document.getElementById('doneBanner'),restBanner=document.getElementById('restBanner');
-  var titleEl=document.getElementById('title'),subEl=document.getElementById('sub'),datel=document.getElementById('datel');
-  var current='A';
+  var pct=document.getElementById('pct'),count=document.getElementById('count'),doneBanner=document.getElementById('doneBanner');
+  var titleEl=document.getElementById('title'),subEl=document.getElementById('sub'),phaseTag=document.getElementById('phaseTag');
+  var phasesEl=document.getElementById('phases'),phaseinfo=document.getElementById('phaseinfo');
+  var current='A',phase=0;
 
   var d=new Date();
   var dateStr=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
   datel.textContent=DAYS[d.getDay()]+' '+d.getDate()+' '+MONTHS[d.getMonth()];
 
-  function key(k){return 'wk:'+dateStr+':'+k;}
-  function save(k,arr){try{localStorage.setItem(key(k),JSON.stringify(arr));}catch(e){}}
-  function load(k){try{var v=localStorage.getItem(key(k));return v?JSON.parse(v):[];}catch(e){return [];}}
+  function key(){return 'wk:'+dateStr+':'+current+':'+phase;}
+  function save(arr){try{localStorage.setItem(key(),JSON.stringify(arr));}catch(e){}}
+  function load(){try{var v=localStorage.getItem(key());return v?JSON.parse(v):[];}catch(e){return [];}}
   function buzz(p){try{if(navigator.vibrate)navigator.vibrate(p);}catch(e){}}
-
   function collect(){var a=[];document.querySelectorAll('.set.on').forEach(function(s){a.push(s.dataset.i);});return a;}
+
+  function sch(it){if(it.fixed)return it.fixed;return it.type==='comp'?PHASES[phase].comp:PHASES[phase].iso;}
+  function nsets(it){if(it.fixed)return 3;return it.type==='comp'?PHASES[phase].cset:PHASES[phase].iset;}
 
   function refresh(){
     var all=document.querySelectorAll('.set'),done=document.querySelectorAll('.set.on').length,total=all.length;
@@ -207,26 +231,41 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
       ex.classList.toggle('complete',b.length>0&&on.length===b.length);
     });
   }
-
   function wire(){
     document.querySelectorAll('.set').forEach(function(s){
       s.addEventListener('click',function(){
         var on=s.classList.toggle('on');
         s.innerHTML=on?'<span class="chk">✓</span>':s.dataset.n;
-        buzz(12);save(current,collect());refresh();
+        buzz(12);save(collect());refresh();
       });
     });
   }
 
-  function render(k){
-    current=k;var s=SESSIONS[k];titleEl.textContent=s.title;subEl.textContent=s.sub;
-    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.key===k);});
-    var saved=load(k),h='';
+  function renderPhase(){
+    var p=PHASES[phase];
+    phaseTag.innerHTML='Phase '+(phase+1)+' — <b>'+p.n+'</b> · '+p.w;
+    var planRows='';
+    PHASES.forEach(function(x,i){planRows+='<p><b>Phase '+(i+1)+' — '+x.n+' ('+x.w+') :</b> composés '+x.comp+', isolations '+x.iso+'. '+x.goal+'</p>';});
+    phaseinfo.innerHTML='<b>'+p.n+'</b> · composés <span class="sch">'+p.comp+'</span>, isolations <span class="sch">'+p.iso+'</span>.<br>'+p.goal
+      +'<details class="plan"><summary>Voir le plan complet 6 mois + règle de progression</summary><div class="pl">'
+      +'<p><b>Règle de progression (double progression) :</b> garde ta fourchette de reps. Quand tu réussis toutes tes séries en haut de la fourchette avec une technique propre, ajoute le plus petit incrément la séance suivante (machine : +1 plaque ≈ 2,5–5 kg). Les reps redescendent, tu remontes, et ainsi de suite.</p>'
+      +planRows+'</div></details>';
+    document.querySelectorAll('.phase').forEach(function(t){t.classList.toggle('active',+t.dataset.p===phase);});
+  }
+
+  function render(){
+    var s=SESSIONS[current];titleEl.textContent=s.title;subEl.textContent=s.sub;
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.key===current);});
+    renderPhase();
+    var saved=load(),h='';
     s.items.forEach(function(it,i){
-      var sets='';
-      for(var j=1;j<=it.sets;j++){var id=i+'-'+j,on=saved.indexOf(id)>-1;
+      var sets='';var ns=nsets(it);
+      for(var j=1;j<=ns;j++){var id=i+'-'+j,on=saved.indexOf(id)>-1;
         sets+='<button class="set'+(on?' on':'')+'" data-n="'+j+'" data-i="'+id+'">'+(on?'<span class="chk">✓</span>':j)+'</button>';}
-      h+='<article class="exo"><div class="top"><span class="idx">'+(i+1)+'</span><div class="names"><h2>'+it.n+'</h2><span class="tgt">'+it.t+'</span></div></div>'
+      var meta=it.cur==='à calibrer'?'<span class="cw">À calibrer</span> — commence léger et trouve ta charge'
+        :('<span class="cw">Actuel '+it.cur+'</span>'+(it.goal?(' · Obj. 6 mois '+it.goal):''));
+      h+='<article class="exo"><div class="top"><span class="idx">'+(i+1)+'</span><div class="names"><h2>'+it.n+'</h2><span class="tgt">'+sch(it)+'</span></div></div>'
+        +'<div class="meta">'+meta+'</div>'
         +'<div class="cue"><span class="lab">'+it.l1+'</span>'+it.c1+'</div>'
         +'<div class="cue"><span class="lab">'+it.l2+'</span>'+it.c2+'</div>'
         +'<div class="sets">'+sets+'</div></article>';
@@ -234,12 +273,17 @@ h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(34px,11vw,48px
     list.innerHTML=h;wire();refresh();
   }
 
-  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){render(t.dataset.key);window.scrollTo({top:0,behavior:'smooth'});});});
-  document.getElementById('reset').addEventListener('click',function(){save(current,[]);render(current);});
+  PHASES.forEach(function(p,i){
+    var b=document.createElement('button');b.className='phase';b.dataset.p=i;
+    b.innerHTML='<b>Phase '+(i+1)+'</b><small>'+p.n+' · '+p.w+'</small>';
+    b.addEventListener('click',function(){phase=i;render();});
+    phasesEl.appendChild(b);
+  });
+  document.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){current=t.dataset.key;render();window.scrollTo({top:0,behavior:'smooth'});});});
+  document.getElementById('reset').addEventListener('click',function(){save([]);render();});
 
-  var todayKey=WEEK[d.getDay()];
-  if(!todayKey){restBanner.classList.add('show');todayKey='A';}
-  render(todayKey);
+  current=WEEK[d.getDay()]||'A';
+  render();
 
   var ttime=document.getElementById('ttime'),timer=null,remain=0;
   function fmt(s){return Math.floor(s/60)+':'+((s%60)<10?'0':'')+(s%60);}
